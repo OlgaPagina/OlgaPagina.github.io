@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Portfolio</title>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/styles.css"/>
+</head>
+
+<body>
+    <div class="container">
+    
+    <!-- NAVIGATION MENU -->
+     <nav id="header">
+        <div class="nav-logo" onclick="scrollToHome()">
+            <p class="nav-name">MY<span>PORTFOLIO</span></p>
+        </div>
+        <div class="nav-menu" id="navMenu">
+            <ul class="nav_menu_list">
+                <li class="nav_list">
+                    <a class="nav-link home" onclick="scrollToHome()">Home</a>
+                </li>
+                <li class="nav_list">
+                    <a class="nav-link about" onclick="scrollToAbout()">About</a>
+                </li>
+                <li class="nav_list">
+                    <a class="nav-link projects" onclick="scrollToProjects()">Projects</a>
+                </li>
+                <li class="nav_list">
+                    <a class="nav-link contact" onclick="scrollToContact()">Contact</a>
+                </li>
+            </ul>
+        </div>
+        <div class="nav-menu-btn">
+            <i class="uil uil-bars" id="toggleBtn"></i>
+        </div>
+    </nav>
+
+    <!-- MAIN -->
+     <main class="wrapper">
+        <!-- Hero Section -->
+        <header class="hero-section  text-center py-5" id="home">
+            <div class="hero-content">    
+                <h1>Welcome to MY<span>PORTFOLIO</span></h1>
+                <p>Web Developer | Designer | Problem Solver</p>
+                <a href="#" class="icon"><i class="uil uil-linkedin-alt"></i></a>
+                <a href="#" class="icon"><i class="uil uil-github-alt"></i></a>
+            </div>
+        </header>
+        
+        <div class="scroll-btn">
+            <a href="#" onclick="scrollToAbout()"><i class="fa-solid fa-angle-down"></i></a>
+        </div>
+
+        <section class="section" id="about">
+            <div class="top-header">
+                <h1>About <span>Me</span></h1>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="about-info">
+                        <h3>Introduction</h3>
+                        <p class="text-center">Hi! I'm a beginner web developer with a passion for creating clean, user-friendly websites. I have experience with HTML, CSS, JavaScript, and Bootstrap, and I'm constantly learning and improving my skills. This portfolio website is a reflection of my journey as a web developer, where I showcase the projects I've worked on and the skills I've developed so far. </p>
+                        <p>I am excited to continue building and growing as a developer, and I look forward to taking on new challenges in the world of web development!</p>
+                    </div>
+                </div>
+                <div class="col skills">
+                    <h3 class="skills-title">Skills</h3>
+                    <div class="col skills-section">
+                        <div class="skills-box frontend">
+                            <div class="skills-header">
+                                <h3>Frontend</h3>
+                            </div>
+                            <div class="skills-list">
+                                <span>HTML</span>
+                                <span>CSS</span>
+                                <span>JavaScript</span>
+                                <span>React</span>
+                            </div>
+                        </div>
+                        <div class="skills-box">
+                            <div class="skills-header">
+                                <h3>Backend</h3>
+                            </div>
+                            <div class="skills-list">
+                                <span>PHP</span>
+                                <span>Java</span>
+                                <span>Python</span>
+                            </div>
+                        </div>
+                        <div class="skills-box">
+                            <div class="skills-header">
+                                <h3>Database</h3>
+                            </div>
+                            <div class="skills-list">
+                                <span>MongoDB</span>
+                                <span>MySQL</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section> 
+
+        <section class="section" id="projects">
+            <div class="top-header">
+                <h1>My <span>Projects</span></h1>
+            </div>
+            <div class="service-container">
+                <a href="pages/todo_list.html">
+                    <div class="service-box">
+                        <i class="uil uil-list-ul"></i>
+                        <h3>TO-DO List</h3>
+                        <label>A simple to-do list application to manage tasks using Node.js.</label>
+                    </div>
+                </a>
+                <a href="pages/schedule.php">
+                    <div class="service-box">
+                        <i class="uil uil-schedule"></i>
+                        <h3>Schedule</h3>
+                        <label>A gym schedule with option to add class and showing booked classes using php and MySQL Database</label>
+                    </div>
+                </a>
+                <a href="#">
+                    <div class="service-box">
+                        <i class="uil uil-schedule"></i>
+                        <h3>Shedule</h3>
+                        <label>DISCRIPTION</label>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <section class="section" id="contact">
+            <div class="top-header">
+                <h1>Get in touch</h1>
+            </div>
+            <div class="row">
+                <div class="col contact-info">
+                    <h2>Find Me <i class="uil uil-corner-right-down"></i></h2>
+                    <p><i class="uil uil-envelope"></i> Email: olga.pagin@gmail.com</p>
+                    <p><i class="uil uil-phone"></i> Tel: 0412 345 678</p>
+                    <div class="social-icons">
+                        <a href="#" class="icon"><i class="uil uil-linkedin-alt"></i></a>
+                        <a href="#" class="icon"><i class="uil uil-github-alt"></i></a>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form">
+                        <div class="form-inputs">
+                            <input type="name" class="input-field" placeholder="Name">
+                            <input type="email" class="input-field" placeholder="Email">
+                        </div>
+                        <div class="text-area">
+                            <textarea placeholder="Message"></textarea>
+                        </div>
+                        <div class="form-button">
+                            <button class="btn">Send <i class="uil uil-message"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+     </main>
+
+     <footer>
+        <div class="top-footer">
+            <p>MY<span>PORTFOLIO</span></p>
+        </div>
+        <div class="middle-footer">
+            <ul class="footer_menu_list">
+                <a onclick="scrollToHome()">Home</a>
+                <a onclick="scrollToAbout()">About</a>
+                <a onclick="scrollToProjects()">Projects</a>
+                <a onclick="scrollToContact()">Contact</a>
+            </ul>
+        </div>
+        <div class="bottom-footer">
+            <p>Copyright &copy; <a href="#home" style="text-decoration: none;">Olga Pagina</a></p>
+        </div>
+     </footer>
+    </div>
+
+    <!-- SCROLL REVEAL JS Link -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <!-- SCROLL REVEAL JS Link -->
+     <script src="js/script2.js"></script>
+</body>
+</html>
