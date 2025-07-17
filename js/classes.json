@@ -1,5 +1,5 @@
 [
   { "time": "9AM", "weekday": "Monday", "class": "Yoga", "level": "Beginner", "duration": "1 hour", "class_id": 1 },
-  { "time": "12PM", "weekday": "Friday", "class": "Pilates", "level": "Advanced", "duration": "1 hour", "class_id": 2 },
+  { "time": "6PM", "weekday": "Wednesday", "class": "Pilates", "level": "Advanced", "duration": "1 hour", "class_id": 2 },
   { "time": "12PM", "weekday": "Friday", "class": "Bodu Pump", "level": "Advanced", "duration": "1 hour", "class_id": 3 }
 ]
