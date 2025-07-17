@@ -127,7 +127,7 @@
   <script src="https://unpkg.com/scrollreveal"></script>
   <script src="../js/script2.js"></script>
   <script>
-    fetch('../js/classes.json')  // Make sure classes.json is in the same folder as your HTML
+    fetch('https://raw.githubusercontent.com/OlgaPagina/OlgaPagina.github.io/refs/heads/main/js/classes.json')  // Make sure classes.json is in the same folder as your HTML
       .then(response => response.json())
       .then(data => {
         data.forEach(cls => {
