@@ -63,13 +63,13 @@
             <tbody>
               <tr>
                 <td id="time">9 am</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td data-time="9AM" data-day="Monday"></td>
+                <td data-time="9AM" data-day="Tuesday"></td>
+                <td data-time="9AM" data-day="Wednesday"></td>
+                <td data-time="9AM" data-day="Thursday"></td>
+                <td data-time="9AM" data-day="Friday"></td>
+                <td data-time="9AM" data-day="Saturday"></td>
+                <td data-time="9AM" data-day="Sunday"></td>
               </tr>
               <tr>
                 <td id="time">12 pm</td>
@@ -104,6 +104,23 @@
 
   <script src="https://unpkg.com/scrollreveal"></script>
   <script src="../js/script2.js"></script>
-
+  <script>
+    fetch('../js/classes.json')  // Make sure classes.json is in the same folder as your HTML
+      .then(response => response.json())
+      .then(data => {
+        data.forEach(cls => {
+          const selector = `td[data-time="${cls.time}"][data-day="${cls.weekday}"]`;
+          const cell = document.querySelector(selector);
+          if (cell) {
+            const link = document.createElement('a');
+            link.href = `booking.html?id=${cls.class_id}`;
+            link.innerHTML = `${cls.class}<br>${cls.level}<br>${cls.duration}`;
+            cell.appendChild(link);
+          }
+        });
+      })
+      .catch(err => console.error('Error loading classes.json:', err));
+</script>
+    
 </body>
 </html>
