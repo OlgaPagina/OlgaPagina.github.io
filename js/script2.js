@@ -253,7 +253,12 @@ restoreData();
 
 //Showing classes
 fetch('https://raw.githubusercontent.com/OlgaPagina/OlgaPagina.github.io/main/js/classes.json')
-  .then(response => response.json())
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return response.json();
+  })
   .then(data => {
     data.forEach(cls => {
       const selector = `td[data-time="${cls.time}"][data-day="${cls.weekday}"]`;
