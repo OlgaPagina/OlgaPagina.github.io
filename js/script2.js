@@ -250,3 +250,20 @@ function restoreData() {
     listContainer.innerHTML = localStorage.getItem('savedData');
 }
 restoreData();
+
+//Showing classes
+fetch('https://raw.githubusercontent.com/OlgaPagina/OlgaPagina.github.io/main/js/classes.json')
+  .then(response => response.json())
+  .then(data => {
+    data.forEach(cls => {
+      const selector = `td[data-time="${cls.time}"][data-day="${cls.weekday}"]`;
+      const cell = document.querySelector(selector);
+      if (cell) {
+        const link = document.createElement('a');
+        link.href = `booking.html?id=${cls.class_id}`;
+        link.innerHTML = `${cls.class}<br>${cls.level}<br>${cls.duration}`;
+        cell.appendChild(link);
+      }
+    });
+  })
+  .catch(err => console.error('Error loading classes.json:', err));
