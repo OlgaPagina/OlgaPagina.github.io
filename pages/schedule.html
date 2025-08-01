@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To-Do List</title>
+    <title>Schedule</title>
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
@@ -27,10 +27,10 @@
             <a class="nav-link home" href="../index.html">Home</a>
           </li>
           <li class="nav_list">
-            <a class="nav-link active-link" >To-do List</a>
+            <a class="nav-link" href="todo_list.html">To-do List</a>
           </li>
           <li class="nav_list">
-            <a class="nav-link projects" onclick="scrollToProjects()">Projects</a>
+            <a class="nav-link active-link" >Schedule</a>
           </li>
           <li class="nav_list">
             <a class="nav-link contact" onclick="scrollToContact()">Contact</a>
@@ -45,6 +45,11 @@
     <section class="section">
       <div class="top-header">
         <h1>SCHE<span>DULE</span></h1>
+      </div>
+
+      <div id="bookings-section">
+        <h2 id="bookings-heading">Your bookings</h2>
+        <ul id="bookings-list"></ul>
       </div>
 
       <table class="table table-border timetable">
@@ -100,10 +105,25 @@
                 <td data-time="6PM" data-day="Friday"></td>
                 <td data-time="6PM" data-day="Saturday"></td>
                 <td data-time="6PM" data-day="Sunday"></td>
-                3PM
               </tr>
             </tbody>
         </table>
+
+        <div class="modal" id="my-modal">
+          <div class="modal_box">
+            <b id="modal-close_btn">&#10005</b>
+            <h2 bookings-heading>CLASS<span>BOOKING</span></h2>
+            <div class="modal_info">
+            <div><strong>Class:</strong></div><div class="class-name"></div>
+            <div><strong>Week day:</strong></div><div class="weekday"></div>
+            <div><strong>Time:</strong></div><div class="time"></div>
+            <div><strong>Duration:</strong></div><div class="duration"></div>
+            <div><strong>Level:</strong></div><div class="level"></div>
+          </div>
+            <button class="btn">Book</button>
+          </div>
+        </div>
+
     </section>
 
     <footer>
@@ -127,21 +147,115 @@
   <script src="https://unpkg.com/scrollreveal"></script>
   <script src="../js/script2.js"></script>
 
-   <script> fetch('https://raw.githubusercontent.com/OlgaPagina/OlgaPagina.github.io/main/js/classes.json')
-  .then(response => response.json())
-  .then(data => {
-    data.forEach(cls => {
-      const selector = `td[data-time="${cls.time}"][data-day="${cls.weekday}"]`;
-      const cell = document.querySelector(selector);
-      if (cell) {
-        const link = document.createElement('a');
-        link.href = `booking.html?id=${cls.class_id}`;
-        link.innerHTML = `${cls.class}<br>${cls.level}<br>${cls.duration}`;
-        cell.appendChild(link);
-      }
-    });
-  })
-  .catch(err => console.error('Error loading classes.json:', err));</script>
+  <script>
+  // Variable to store current class info shown in modal
+  let currentBooking = null;
+
+  // Load and show classes, add event listeners
+  fetch('https://raw.githubusercontent.com/OlgaPagina/OlgaPagina.github.io/main/js/classes.json')
+    .then(response => response.json())
+    .then(data => {
+      data.forEach(cls => {
+        const selector = `td[data-time="${cls.time}"][data-day="${cls.weekday}"]`;
+        const cell = document.querySelector(selector);
+
+        if (cell) {
+          const link = document.createElement('a');
+          link.id = `class-${cls.class_id}`;
+          link.href = "#";
+          link.innerHTML = `${cls.class}<br>${cls.level}<br>${cls.duration}`;
+
+          link.addEventListener("click", function (e) {
+            e.preventDefault();
+            const modal = document.getElementById("my-modal");
+            modal.classList.add("open");
+
+            // Populate modal spans
+            document.querySelector('.class-name').textContent = cls.class;
+            document.querySelector('.weekday').textContent = cls.weekday;
+            document.querySelector('.time').textContent = cls.time;
+            document.querySelector('.duration').textContent = cls.duration;
+            document.querySelector('.level').textContent = cls.level;
+
+            // Save current class info for booking
+            currentBooking = {
+              class: cls.class,
+              weekday: cls.weekday,
+              time: cls.time,
+              duration: cls.duration,
+              level: cls.level
+            };
+          });
+
+          cell.appendChild(link);
+        }
+        document.getElementById("modal-close_btn").addEventListener("click", function () {
+        document.getElementById("my-modal").classList.remove("open");
+      });
+      });
+    })
+    .catch(err => console.error('Error loading classes.json:', err));
+
+
+  // Book button handler
+  document.querySelector("#my-modal .btn").addEventListener("click", function() {
+    if (!currentBooking) return;
+
+    // Get current bookings or empty array
+    let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+
+    // Add new booking
+    bookings.push(currentBooking);
+
+    // Save to localStorage
+    localStorage.setItem("bookings", JSON.stringify(bookings));
+
+    // Update bookings list on page
+    displayBookings();
+
+    // Close modal
+    document.getElementById("my-modal").classList.remove("open");
+  });
+
+  // Function to show bookings at top
+  function displayBookings() {
+  const bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+  const list = document.getElementById("bookings-list");
+  const heading = document.getElementById("bookings-heading"); 
+  list.innerHTML = "";
+
+  if (bookings.length === 0) {
+    heading.style.display = "none";
+    return;
+  } else {
+    heading.style.display = "block";
+  }
+
+  bookings.forEach((booking, index) => {
+    const li = document.createElement("li");
+    li.innerHTML = `${booking.class} - ${booking.weekday} at ${booking.time} (${booking.duration}) - Level: ${booking.level}`;
+    
+    const delBtn = document.createElement("b");
+    delBtn.innerHTML = '&#10005'; 
+    delBtn.classList.add('delete');
+    delBtn.style.cursor = 'pointer';
+    delBtn.style.marginLeft = '10px';
+
+    // Add delete functionality
+    delBtn.onclick = () => {
+      bookings.splice(index, 1);
+      localStorage.setItem("bookings", JSON.stringify(bookings));
+      displayBookings(); // Refresh the list
+    };
+
+    li.appendChild(delBtn);
+    list.appendChild(li);
+  });
+}
+
+  // Show bookings on page load
+  window.addEventListener("DOMContentLoaded", displayBookings);
+</script>
     
 </body>
 </html>
