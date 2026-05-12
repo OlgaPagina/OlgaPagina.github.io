@@ -398,7 +398,7 @@ label{
     justify-content: center;
     align-items: center;
     padding: 20px 30px;
-    min-height: 315px;
+    height: 315px;
     background: transparent;
     border-radius: 10px;
     border: 2px solid var(--pink--);
