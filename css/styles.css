@@ -426,7 +426,7 @@ label{
     margin: 5px 0;
     transition: all .3s;
 }
-.contact-info icon{
+.contact-info .icon{
     margin: 0 30px;
 }
 
