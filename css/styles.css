@@ -404,14 +404,13 @@ label{
     border: 2px solid var(--pink--);
     box-shadow: var(--shadow);
     overflow: hidden;
-
     gap: 18px;
-    padding: 40px 30px;
 }
 .contact-info h2{
     color: var(--white--);
     margin-bottom: 20px;
     transition: all .5s;
+    padding: 0;
 }
 .contact-info p{
     display: flex;
@@ -420,6 +419,7 @@ label{
     color: var(--white--);
     margin-block: 5px;
     transition: all .5s;
+    padding: 0;
 }
 .contact-social-icons a{
     color: var(--pink--);
